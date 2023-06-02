@@ -28,6 +28,9 @@ export default function App() {
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
 
+  //state to use input
+  const [text, setText] = React.useState("");
+
   return (
     <PaperProvider>
       {/* view wrapper for the menu implementation. */}
@@ -77,6 +80,15 @@ export default function App() {
           ></Button>
           {/* for rendering testing */}
           <Button mode="text" icon="alien"></Button>
+        </View>
+
+        <View>
+          <TextInput
+            mode="flat"
+            lable="lable"
+            onChangeText={(text) => setText(text)}
+            value={text}
+          />
         </View>
       </ScrollView>
     </PaperProvider>
