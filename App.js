@@ -24,24 +24,59 @@ export default function App() {
   // const [checkedRadio, setCheckedRadio] = React.useState("first");
 
   //stated for the menu
-  // const [visible, setVisible] = React.useState(false);
-  // const openMenu = () => setVisible(true);
-  // const closeMenu = () => setVisible(false);
+  const [visible, setVisible] = React.useState(false);
+  const openMenu = () => setVisible(true);
+  const closeMenu = () => setVisible(false);
 
   return (
     <PaperProvider>
       {/* view wrapper for the menu implementation. */}
-
+      <View
+        style={{ padding: 50, flexDirection: "row", justifyContent: "center" }}
+      >
+        <Menu
+          visible={visible}
+          onDismiss={closeMenu}
+          anchor={
+            <Button icon="cheese" onPress={openMenu}>
+              Show Cool Menu
+            </Button>
+          }
+        >
+          <Menu.Item onPress={() => {}} title="Item 1" />
+          <Menu.Item onPress={() => {}} title="Item 2" />
+          <Divider />
+          <Menu.Item onPress={() => {}} title="Item 3" />
+        </Menu>
+      </View>
       <View style={styles.container}>
         <Text>React-Native-Page POC on Expo!</Text>
         <Text>stable test!</Text>
       </View>
       <ScrollView>
         <View>
-          <Button icon="alien"></Button>
-          <Button icon="triforce"></Button>
-          <Button icon="cheese"></Button>
-          <Button icon="bacteria"></Button>
+          <Button
+            mode="contained"
+            icon="alien"
+            onPress={() => console.log("Pressed Alien")}
+          ></Button>
+          <Button
+            mode="contained"
+            icon="triforce"
+            onPress={() => console.log("You found the Triforce!")}
+          ></Button>
+          <Button
+            mode="elevated"
+            icon="cheese"
+            onPress={() => console.log("Have some Cheese! ")}
+          ></Button>
+          <Button
+            mode="outlined"
+            icon="bacteria"
+            onPress={() => console.log("This is NOT a bug!")}
+          ></Button>
+          {/* for rendering testing */}
+          <Button mode="text" icon="alien"></Button>
         </View>
       </ScrollView>
     </PaperProvider>
