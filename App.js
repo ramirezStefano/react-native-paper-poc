@@ -79,15 +79,20 @@ export default function App() {
             onPress={() => console.log("This is NOT a bug!")}
           ></Button>
           {/* for rendering testing */}
-          <Button mode="text" icon="alien"></Button>
+          <Button
+            mode="text"
+            icon="alien"
+            onPress={() => console.log("Another one?")}
+          ></Button>
         </View>
 
         <View>
           <TextInput
             mode="flat"
-            lable="lable"
+            label="label"
             onChangeText={(text) => setText(text)}
             value={text}
+            textColor="blue"
           />
         </View>
       </ScrollView>
