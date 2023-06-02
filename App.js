@@ -14,6 +14,7 @@ import {
   MD3Colors,
   Menu,
   Divider,
+  Appbar,
 } from "react-native-paper";
 
 export default function App() {
@@ -34,6 +35,14 @@ export default function App() {
   return (
     <PaperProvider>
       {/* view wrapper for the menu implementation. */}
+
+      {/* Appbar component here for the TopBar */}
+      <Appbar.Header>
+        <Appbar.BackAction onPress={() => {}} />
+        <Appbar.Content title="Appbar Header!" />
+        <Appbar.Action icon="rocket" onPress={() => {}} />
+      </Appbar.Header>
+
       <View
         style={{ padding: 50, flexDirection: "row", justifyContent: "center" }}
       >
@@ -89,7 +98,7 @@ export default function App() {
         <View>
           <TextInput
             mode="flat"
-            label="label"
+            label="Say hello!"
             onChangeText={(text) => setText(text)}
             value={text}
             textColor="blue"
