@@ -1,110 +1,65 @@
 import * as React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import {
   MD3LightTheme as DefaultTheme,
   PaperProvider,
-  Button,
-  TextInput,
-  Card,
-  Avatar,
-  Checkbox,
-  RadioButton,
-  List,
-  MD3Colors,
-  Menu,
-  Divider,
-  Appbar,
+  BottomNavigation,
+  Text,
 } from "react-native-paper";
 
+const MapRoute = () => <Text>Map</Text>;
+
+const AdsRoute = () => <Text>Ads</Text>;
+
+const LeadsRoute = () => <Text>Leads</Text>;
+
+const BudgetRoute = () => <Text>Budget</Text>;
+
 export default function App() {
-  //const LeftContent = (props) => <Avatar.Icon {...props} icon="alien" />;
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    {
+      key: "Map",
+      title: "Map",
+      focusedIcon: "map-check",
+      unfocusedIcon: "map",
+    },
+    {
+      key: "Ads",
+      title: "Ads",
+      focusedIcon: "map-marker-star",
+      unfocusedIcon: "map-marker-star-outline",
+    },
+    {
+      key: "Leads",
+      title: "Leads",
+      focusedIcon: "phone-ring",
+      unfocusedIcon: "phone-ring-outline",
+      badge: 5,
+    },
+    {
+      key: "Budget",
+      title: "Budget",
+      focusedIcon: "finance",
+      unfocusedIcon: "finance",
+    },
+  ]);
 
-  //useState for the checkbox and state .
-  // const [checked, setChecked] = React.useState(false);
-  // const [checkedRadio, setCheckedRadio] = React.useState("first");
-
-  //stated for the menu
-  const [visible, setVisible] = React.useState(false);
-  const openMenu = () => setVisible(true);
-  const closeMenu = () => setVisible(false);
-
-  //state to use input
-  const [text, setText] = React.useState("");
+  const renderScene = BottomNavigation.SceneMap({
+    Map: MapRoute,
+    Ads: AdsRoute,
+    Leads: LeadsRoute,
+    Budget: BudgetRoute,
+  });
 
   return (
     <PaperProvider>
-      {/* view wrapper for the menu implementation. */}
-
-      {/* Appbar component here for the TopBar */}
-      <Appbar.Header>
-        <Appbar.BackAction onPress={() => {}} />
-        <Appbar.Content title="Appbar Header!" />
-        <Appbar.Action icon="rocket" onPress={() => {}} />
-      </Appbar.Header>
-
-      <View
-        style={{ padding: 50, flexDirection: "row", justifyContent: "center" }}
-      >
-        <Menu
-          visible={visible}
-          onDismiss={closeMenu}
-          anchor={
-            <Button icon="cheese" onPress={openMenu}>
-              Show Cool Menu
-            </Button>
-          }
-        >
-          <Menu.Item onPress={() => {}} title="Item 1" />
-          <Menu.Item onPress={() => {}} title="Item 2" />
-          <Divider />
-          <Menu.Item onPress={() => {}} title="Item 3" />
-        </Menu>
-      </View>
-      <View style={styles.container}>
-        <Text>React-Native-Page POC on Expo!</Text>
-        <Text>stable test!</Text>
-      </View>
-      <ScrollView>
-        <View>
-          <Button
-            mode="contained"
-            icon="alien"
-            onPress={() => console.log("Pressed Alien")}
-          ></Button>
-          <Button
-            mode="contained"
-            icon="triforce"
-            onPress={() => console.log("You found the Triforce!")}
-          ></Button>
-          <Button
-            mode="elevated"
-            icon="cheese"
-            onPress={() => console.log("Have some Cheese! ")}
-          ></Button>
-          <Button
-            mode="outlined"
-            icon="bacteria"
-            onPress={() => console.log("This is NOT a bug!")}
-          ></Button>
-          {/* for rendering testing */}
-          <Button
-            mode="text"
-            icon="alien"
-            onPress={() => console.log("Another one?")}
-          ></Button>
-        </View>
-
-        <View>
-          <TextInput
-            mode="flat"
-            label="Say hello!"
-            onChangeText={(text) => setText(text)}
-            value={text}
-            textColor="blue"
-          />
-        </View>
-      </ScrollView>
+      <BottomNavigation
+        navigationState={{ index, routes }}
+        onIndexChange={setIndex}
+        renderScene={renderScene}
+      />
     </PaperProvider>
   );
 }
